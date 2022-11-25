@@ -33,7 +33,7 @@ createUser(req, res) {
 }
 };
 
-//delete a user
+// delete a user
 // deleteUser(req, res) {
 //   User.findOneAndDelete({ _id: req.params.userId })
 //   .then((user) => 
