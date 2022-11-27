@@ -6,7 +6,8 @@ module.exports = {
     User.find()
       .select('-__v')
       .populate({
-        path: 'friends', select: '-__v'
+        path: 'thoughts',
+        path: 'friends',
 
       })
       .then((users) => res.json(users))

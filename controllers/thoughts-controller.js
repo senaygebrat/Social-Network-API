@@ -5,17 +5,26 @@ module.exports = {
   getThoughts(req, res) {
     Thought.find()
     .select('-__v')
-
-    .then((users) => res.json(users))
-    .catch((err) => res.status(500).json(err));
+    .populate({
+      // path: 'thoughts', select: '-__v'
+    })
+    .then((thoughts) => res.json(thoughts))
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json(err)});
 },
 
+//get single thought by id
+
+
+
+//create a new thought
 createThought(req, res) {
   Thought.create(req.body)
   .then((thought) => {
     return User.findOneAndUpdate(
       { username: req.body.username },
-      { $push: {thoughts: thought.id}}
+      { $push: {thoughts: thought._id}}
       )
   })
   .then(() => res.json({message: "Thought successfully added!"}))
@@ -23,6 +32,18 @@ createThought(req, res) {
     console.log(err)
     res.status(500).json(err)});
 },
+
+
+//update thought by id
+
+
+
+//delete thought
+deleteThought(req, res) {
+  Thought.findOneAndUpdate(
+    { _id: req.params.userId }
+  )
+}
 
 
 
