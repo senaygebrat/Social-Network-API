@@ -26,7 +26,9 @@ getSingleUser(req, res) {
 createUser(req, res) {
   User.create(req.body)
   .then((user) => res.json(user))
-  .catch((err) => res.status(500).json(err));
+  .catch((err) => {
+    console.log(err)
+    res.status(500).json(err)});
 },
 
 updateUser(req, res) {
@@ -57,9 +59,26 @@ deleteUser(req, res) {
   })
 .then(() => res.json({ message: 'User deleted!' }))
 .catch((err) => res.status(500).json(err));
-}
+},
 
-
+addFriend(req, res) {
+  User.findOneAndUpdate(
+    { _id: req.params.userId },
+    { $addToSet: {friends: req.params.friendId} },
+    { runValidators: true, new: true },
+    )
+    .then((user) => {
+          if(!user){        
+            res.status(404).json({ message: 'No user with this id!' })
+          }
+          else{res.json(user)
+          }
+})
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+},
 
 
 
