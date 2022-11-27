@@ -5,11 +5,6 @@ module.exports = {
   getUsers(req, res) {
     User.find()
       .select('-__v')
-      .populate({
-        path: 'thoughts',
-        path: 'friends',
-
-      })
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
@@ -36,6 +31,7 @@ createUser(req, res) {
     res.status(500).json(err)});
 },
 
+//update user by id
 updateUser(req, res) {
   User.findOneAndUpdate(
     { _id: req.params.userId },
@@ -65,6 +61,7 @@ deleteUser(req, res) {
 .then(() => res.json({ message: 'User deleted!' }))
 .catch((err) => res.status(500).json(err));
 },
+
 
 addFriend(req, res) {
   User.findOneAndUpdate(
