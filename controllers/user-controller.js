@@ -46,23 +46,26 @@ updateUser(req, res) {
       console.log(err);
       res.status(500).json(err);
     });
+},
 
-
-
+// delete a user
+deleteUser(req, res) {
+  User.findOneAndDelete({ _id: req.params.userId })
+  .then((user) => {
+  if(!user){
+    res.status(404).json({ message: 'No user with that ID' })}
+  })
+.then(() => res.json({ message: 'User deleted!' }))
+.catch((err) => res.status(500).json(err));
 }
 
+
+
+
+
+
+//end of module.exports
 
 };
 
 
-
-// delete a user
-// deleteUser(req, res) {
-//   User.findOneAndDelete({ _id: req.params.userId })
-//   .then((user) => 
-//   !user
-//   ? res.status(404).json({ message: 'No user with that ID' })
-//   : 
-//   )
-//   .then(() => res.json({ message: 'User deleted!' }))
-// }
