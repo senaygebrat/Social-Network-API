@@ -84,12 +84,24 @@ addFriend(req, res) {
     });
 },
 
-// deleteFriend(req, res) {
-//   User.findOneAndDelete(
-//   { __id: req.params.userId },
-
-// )
-// }
+deleteFriend(req, res) {
+  User.findOneAndUpdate(
+  { _id: req.params.userId },
+  { $pull: {friends: req.params.friendId} },
+  { runValidators: true, new: true },
+  )
+  .then((user) => {
+    if(!user){        
+      res.status(404).json({ message: 'No user with this id!' })
+    }
+    else{res.json(user)
+    }
+})
+  .catch((err) => { 
+  console.log(err);
+  res.status(500).json(err);
+});
+}
 
 
 
