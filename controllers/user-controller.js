@@ -5,6 +5,10 @@ module.exports = {
   getUsers(req, res) {
     User.find()
       .select('-__v')
+      .populate({
+        path: 'friends', select: '-__v'
+
+      })
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
@@ -79,6 +83,13 @@ addFriend(req, res) {
       res.status(500).json(err);
     });
 },
+
+// deleteFriend(req, res) {
+//   User.findOneAndDelete(
+//   { __id: req.params.userId },
+
+// )
+// }
 
 
 

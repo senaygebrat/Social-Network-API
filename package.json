@@ -1,6 +1,26 @@
 {
   "dependencies": {
     "express": "^4.18.2",
-    "mongoose": "^6.7.3"
-  }
+    "mongoose": "^6.7.3",
+    "nodemon": "^2.0.20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "name": "social-network-api",
+  "description": "",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/senaygebrat/Social-Network-API.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/senaygebrat/Social-Network-API/issues"
+  },
+  "homepage": "https://github.com/senaygebrat/Social-Network-API#readme"
 }
