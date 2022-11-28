@@ -101,6 +101,7 @@ deleteReaction(req, res) {
   Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
   { $pull: {reactions: {reactions: req.body.reactionId} } },
+ 
   { runValidators: true, new: true },
   )
   .then((thought) => {

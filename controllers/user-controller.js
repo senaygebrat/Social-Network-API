@@ -101,11 +101,4 @@ deleteFriend(req, res) {
 });
 }
 
-
-
-
-//end of module.exports
-
 };
-
-
