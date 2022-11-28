@@ -75,8 +75,8 @@ deleteThought(req, res) {
   .catch((err) => res.status(500).json(err));
 },
 
-//2 more routes for reactions
 
+//add a reaction to a single thought
 addReaction(req, res){
   Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
@@ -96,10 +96,11 @@ addReaction(req, res){
 });
 },
 
+//delete route by pulling reaction id
 deleteReaction(req, res) {
   Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
-  { $pull: {reactions: req.body.reactionId} },
+  { $pull: {reactions: {reactions: req.body.reactionId} } },
   { runValidators: true, new: true },
   )
   .then((thought) => {
