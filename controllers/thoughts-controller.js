@@ -18,12 +18,11 @@ getSingleThought(req, res){
   .select('-__v')
   .then((thought) =>
   !thought
-    ? res.status(404).json({ message: 'No thought with that ID' })
+    ? res.status(404).json({ message: 'No thought with that ID!' })
     : res.json(thought)
   )
   .catch((err) => res.status(500).json(err))
 },
-
 
 
 //create a new thought
@@ -100,7 +99,7 @@ addReaction(req, res){
 deleteReaction(req, res) {
   Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
-  { $pull: {reactions: req.params.thoughtId} },
+  { $pull: {reactions: req.body.reactionId} },
   { runValidators: true, new: true },
   )
   .then((thought) => {
