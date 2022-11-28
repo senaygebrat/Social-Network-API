@@ -100,7 +100,7 @@ addReaction(req, res){
 deleteReaction(req, res) {
   Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
-  { $pull: {reactions: {reactions: req.body.reactionId} } },
+  { $pull: {reactions: {reactionId: req.body.reactionId} } },
  
   { runValidators: true, new: true },
   )
