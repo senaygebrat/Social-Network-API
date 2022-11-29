@@ -14,6 +14,8 @@ This is a back-end program that allows an end user to create users, their though
 
 
 ### Technologies Used
+Please click on each link for installation
+
 [MongoDB](https://www.mongodb.com/docs/manual/installation/) 
 
 [Mongoose](https://mongoosejs.com/docs/#)
