@@ -1,5 +1,5 @@
 # Social-Network-API
-[Insomnia Preview](./assets/images/social-network.gif)
+![Insomnia Preview](./assets/images/social-network.gif)
 
 
 ## Description
