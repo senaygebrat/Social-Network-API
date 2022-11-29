@@ -14,6 +14,14 @@ module.exports = {
 getSingleUser(req, res) {
   User.findOne({ _id: req.params.userId })
   .select('-__v')
+  .populate({ 
+    path: 'thoughts',
+    select: '-__v',
+  })
+  .populate({
+    path: 'friends',
+    select: '-__v'
+  })
   .then((user) =>
   !user
     ? res.status(404).json({ message: 'No user with that ID' })
@@ -56,9 +64,15 @@ deleteUser(req, res) {
   User.findOneAndDelete({ _id: req.params.userId })
   .then((user) => {
   if(!user){
-    res.status(404).json({ message: 'No user with that ID' })}
+    res.status(404).json({ message: 'No user with that ID' })
+  return
+  }
+  return Thought.deleteMany({
+    _id: { $in: user.thoughts }
   })
-.then(() => res.json({ message: 'User deleted!' }))
+
+  })
+.then(() => res.status(200).json({ message: 'User deleted!' }))
 .catch((err) => res.status(500).json(err));
 },
 
