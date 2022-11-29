@@ -1,7 +1,7 @@
 const { User, Thought } = require('../models');
 
 module.exports = {
-  //get all thoughts
+  //get all thoughts, /api/thoughts
   getThoughts(req, res) {
     Thought.find()
     .select('-__v')
@@ -12,7 +12,7 @@ module.exports = {
       res.status(500).json(err)});
 },
 
-//get single thought by id
+//get single thought by id, /api/thoughts/:thoughtsid
 getSingleThought(req, res){
   Thought.findOne({ _id: req.params.thoughtId })
   .select('-__v')
@@ -25,7 +25,7 @@ getSingleThought(req, res){
 },
 
 
-//create a new thought
+//create a new thought, /api/thoughts
 createThought(req, res) {
   Thought.create(req.body)
   .then((thought) => {
@@ -41,7 +41,7 @@ createThought(req, res) {
 },
 
 
-//update thought by id
+//update thought by id, /api/thoughts/:thoughtsid
 updateThought(req, res){
   Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
@@ -62,7 +62,7 @@ res.status(500).json(err);
 },
 
 
-//delete thought
+//delete thought, /api/thoughts/:thoughtsid
 deleteThought(req, res) {
   Thought.findOneAndDelete(
     { _id: req.params.thoughtId }

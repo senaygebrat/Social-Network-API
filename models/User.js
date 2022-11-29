@@ -12,7 +12,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      match: [/^\S+@\S+\.\S+$/,"must include in email"],
+      match: [/^\S+@\S+\.\S+$/,"must include in email"], //regex to ensure email is valid format
     },
     thoughts: [
       {

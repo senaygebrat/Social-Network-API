@@ -9,7 +9,6 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-
 // get a single user, /api/user/:userid
 getSingleUser(req, res) {
   User.findOne({ _id: req.params.userId })
@@ -30,7 +29,7 @@ getSingleUser(req, res) {
   .catch((err) => res.status(500).json(err))
 },
 
-//create a user
+//create a user, /api/users
 createUser(req, res) {
   User.create(req.body)
   .then((user) => res.json(user))
@@ -39,7 +38,7 @@ createUser(req, res) {
     res.status(500).json(err)});
 },
 
-//update user by id
+//update user by id, /api/users/:userid
 updateUser(req, res) {
   User.findOneAndUpdate(
     { _id: req.params.userId },
@@ -59,7 +58,7 @@ updateUser(req, res) {
     });
 },
 
-// delete a user
+// delete a user, /api/users/:userid
 deleteUser(req, res) {
   User.findOneAndDelete({ _id: req.params.userId })
   .then((user) => {
@@ -67,7 +66,7 @@ deleteUser(req, res) {
     res.status(404).json({ message: 'No user with that ID' })
   return
   }
-  return Thought.deleteMany({
+  return Thought.deleteMany({  //bonus option to delete associated thought
     _id: { $in: user.thoughts }
   })
 
@@ -76,7 +75,7 @@ deleteUser(req, res) {
 .catch((err) => res.status(500).json(err));
 },
 
-
+//add a friend route
 addFriend(req, res) {
   User.findOneAndUpdate(
     { _id: req.params.userId },
@@ -96,6 +95,7 @@ addFriend(req, res) {
     });
 },
 
+//delete a friend
 deleteFriend(req, res) {
   User.findOneAndUpdate(
   { _id: req.params.userId },
