@@ -1,5 +1,5 @@
 # Social-Network-API
-
+[Insomnia Preview](./assets/images/social-network.gif)
 
 
 ## Description
@@ -13,7 +13,7 @@ This is a back-end program that allows an end user to create users, their though
 - [Author](#author)
 
 
-## Technologies Used
+### Technologies Used
 [MongoDB](https://www.mongodb.com/docs/manual/installation/) 
 
 [Mongoose](https://mongoosejs.com/docs/#)
@@ -44,6 +44,28 @@ deleteUser(req, res) {
 },
 ```
 
+Here is how to add a reaction. First you need to find which thought it applies to and update accordingly.
+```
+addReaction(req, res){
+  Thought.findOneAndUpdate(
+    { _id: req.params.thoughtId },
+    { $addToSet: {reactions: req.body} },
+    { runValidators: true, new: true },
+  )
+  .then((thought) => {
+    if(!thought){        
+      res.status(404).json({ message: 'No thought with this id!' })
+    }
+    else{res.json(thought)
+    }
+})
+  .catch((err) => {
+  console.log(err);
+  res.status(500).json(err);
+});
+},
+```
+
 ## Author
 
-If you have any questions about the repository, open an issue or contact me directly at senaygebrat@gmail.com. You can find more of my work at [my Github](https://github.com/senaygebrat?tab=repositories), and my contact information at [LinkedIn](https://linkedin.com/in/senayg).
+If you have any questions about the repository, open an issue or contact me directly at senaygebrat@gmail.com. You can find more of my work at [my Github](https://github.com/senaygebrat?tab=repositories), and further contact information at [LinkedIn](https://linkedin.com/in/senayg).
